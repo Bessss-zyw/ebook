@@ -1,0 +1,30 @@
+<!--pages/book-detail/book-detail.wxml-->
+<view class="book-detail-page">
+  <image class="book-img" src="{{bookInfo.imgUrl}}"/>
+  <view class="book-detail">
+    <view class="detail-item">
+      <text class="title"> name: </text>
+      <text class="info">{{bookInfo.name}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> author: </text>
+      <text class="info">{{bookInfo.author}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> language: </text>
+      <text class="info">{{bookInfo.language}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> price: </text>
+      <text class="info">{{bookInfo.price}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> detail: </text>
+      <text class="info">{{bookInfo.detail}}</text>
+    </view>
+  </view>
+  <view class="button-box">
+    <button class="mini-btn" size="mini">add to cart~</button>
+    <button class="mini-btn" size="mini">buy it now!</button>
+  </view>
+</view>

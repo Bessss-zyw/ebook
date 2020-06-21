@@ -1,0 +1,33 @@
+/* pages/userInfo/userInfo.wxss */
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50rpx;
+  margin-top: 100rpx;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.nickname, .tel, .email, .address {
+  /* margin-left: 40px; */
+  display: flex;
+  flex-direction: row;
+  /* background-color: coral; */
+}
+
+.nickname input, .tel input, .email input, .address input {
+  margin-left: 40px;
+  /* background-color: cyan; */
+}
+
+.info {
+  width: 100%;
+  /* background-color: burlywood; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

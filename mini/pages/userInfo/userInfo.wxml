@@ -1,0 +1,28 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class="userInfo-page">
+  <view class="userInfo-container">
+    <view class="avatar">
+      <image class="avatar-img" mode="aspectFill" src="../../static/img/avatar.png"></image>
+    </view>
+    <form>
+      <view class="info">
+        <view class="nickname">
+          <text>昵称</text>
+          <input value="nickname"></input>
+        </view>
+        <view class="email">
+          <text>邮箱</text>
+          <input value="email"></input>
+        </view>
+        <view class="address">
+          <text>地址</text>
+          <input value="address"></input>
+        </view>
+        <view class="tel">
+          <text>电话</text>
+          <input value="tel"></input>
+        </view>
+      </view>
+    </form>
+  </view>
+</view>
