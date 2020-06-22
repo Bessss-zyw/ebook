@@ -5,17 +5,20 @@ import com.reins.bookstore.dao.BookDao;
 import com.reins.bookstore.dao.CartDao;
 import com.reins.bookstore.dao.OrderDao;
 import com.reins.bookstore.dao.UserDao;
-import com.reins.bookstore.entity.Book;
-import com.reins.bookstore.entity.CartItem;
-import com.reins.bookstore.entity.Order;
-import com.reins.bookstore.entity.OrderItem;
+import com.reins.bookstore.entity.*;
+import com.reins.bookstore.service.extra.BookSale;
+import com.reins.bookstore.service.extra.UserConsume;
 import com.reins.bookstore.utils.sessionutils.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.function.Predicate;
+
 
 @Service
 public class OrderService {
@@ -137,6 +140,118 @@ public class OrderService {
         return true;
 
     }
+
+
+    /**
+     * Calculate the cumulative consumption of each book
+     * and sort the result from high to low
+     */
+    public List<BookSale> getBookSale(Timestamp start, Timestamp end) {
+        List<Book> books = bookDao.getBooks();
+
+        List<BookSale> bookSaleList = new ArrayList<>();
+        for (Book book: books) {
+            bookSaleList.add(new BookSale(0, book));
+        }
+
+        List<Order> orders = orderDao.getOrderDuring(start, end);
+        for (Order order: orders) {
+            List<OrderItem> orderItems = orderDao.getOrderItems(order.getOrder_id());
+
+            for (OrderItem item: orderItems) {
+                for (BookSale bookSale: bookSaleList) {
+                    if (!bookSale.match(item.getBook_id())) continue;
+                    bookSale.addSale(item.getNum());
+                    break;
+                }
+            }
+        }
+
+        bookSaleList.sort(new Comparator<BookSale>() {
+            @Override
+            public int compare(BookSale t1, BookSale t2) {
+                return Integer.compare(t2.getSale(), t1.getSale());
+            }
+        });
+
+        return bookSaleList;
+    }
+
+
+    /**
+     * Calculate the cumulative consumption of each user
+     * and the result is not sorted
+     */
+    public List<UserConsume> getUserConsume(Timestamp start, Timestamp end) {
+        List<UserAuth> users = userDao.getAllAuth();
+
+        List<UserConsume> userConsumes = new ArrayList<>();
+        for (UserAuth user: users) {
+            userConsumes.add(new UserConsume(0, 0.0, user));
+        }
+
+        List<Order> orders = orderDao.getOrderDuring(start, end);
+        for (Order order: orders) {
+            System.out.println(order);
+            List<OrderItem> orderItems = orderDao.getOrderItems(order.getOrder_id());
+
+            for (UserConsume userConsume: userConsumes) {
+                if (!userConsume.match(order.getUser_id())) continue;
+                for (OrderItem item: orderItems) {
+                    userConsume.addBookNum(item.getNum());
+                    userConsume.addExpenditure(item.getNum() * item.getBook_price());
+                }
+            }
+        }
+
+        return userConsumes;
+    }
+
+
+    /**
+     * Calculate the cumulative consumption of this user
+     * and sort the result from high to low
+     */
+    public List<BookSale> getUserReport(int user_id, Timestamp start, Timestamp end) {
+        List<Book> books = bookDao.getBooks();
+
+        List<BookSale> bookSaleList = new ArrayList<>();
+        for (Book book: books) {
+            bookSaleList.add(new BookSale(0, book));
+        }
+
+        List<Order> orders = orderDao.getUserOrderDuring(user_id, start, end);
+        for (Order order: orders) {
+            List<OrderItem> orderItems = orderDao.getOrderItems(order.getOrder_id());
+
+            for (OrderItem item: orderItems) {
+                for (BookSale bookSale: bookSaleList) {
+                    if (!bookSale.match(item.getBook_id())) continue;
+                    bookSale.addSale(item.getNum());
+                    break;
+                }
+            }
+        }
+
+
+        bookSaleList.removeIf(new Predicate<BookSale>() {
+            @Override
+            public boolean test(BookSale bookSale) {
+                if (bookSale.getSale() == 0) return true;
+                else return false;
+            }
+        });
+
+        bookSaleList.sort(new Comparator<BookSale>() {
+            @Override
+            public int compare(BookSale t1, BookSale t2) {
+                return Integer.compare(t2.getSale(), t1.getSale());
+            }
+        });
+
+        return bookSaleList;
+    }
+
 
 
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -44,6 +45,16 @@ public class OrderDaoImpl implements OrderDao {
         return orderRepository.getAllOrder();
     };
 
+
+    @Override
+    public List<Order> getOrderDuring(Timestamp start, Timestamp end){
+        return orderRepository.getOrderDuring(start,end);
+    };
+
+    @Override
+    public List<Order> getUserOrderDuring(int user_id, Timestamp start, Timestamp end){
+        return orderRepository.getUserOrderDuring(user_id, start, end);
+    };
 
 
     @Override
