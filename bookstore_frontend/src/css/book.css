@@ -1,0 +1,11 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cardContent {
+    play: flex;
+    flex-direction: column;
+    align-items: center;
+}

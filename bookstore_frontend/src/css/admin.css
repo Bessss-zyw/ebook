@@ -1,0 +1,24 @@
+.infoBar {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin: 3px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.add-infoBar {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.imgChangeBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
