@@ -1,13 +1,47 @@
 {
   "pages":[
-    "pages/index/index"
+    "pages/login/login",
+    "pages/home/home",
+    "pages/userInfo/userInfo",
+    "pages/cart/cart",
+    "pages/order/order",
+    "pages/bookDetail/bookDetail"
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarBackgroundColor": "#ffc107",
+    "navigationBarTitleText": "ebook",
     "navigationBarTextStyle":"black"
   },
-  "style": "v2",
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#ffc107",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "home",
+        "iconPath": "/static/img/home.png",
+        "selectedIconPath": "/static/img/home.png"
+      },
+      {
+        "pagePath": "pages/cart/cart",
+        "text": "cart",
+        "iconPath": "/static/img/cart.png",
+        "selectedIconPath": "/static/img/cart.png"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "text": "order",
+        "iconPath": "/static/img/order.png",
+        "selectedIconPath": "/static/img/order.png"
+      },
+      {
+        "pagePath": "pages/userInfo/userInfo",
+        "text": "account",
+        "iconPath": "/static/img/user.png",
+        "selectedIconPath": "/static/img/user.png"
+      }
+    ]
+  },
   "sitemapLocation": "sitemap.json"
 }

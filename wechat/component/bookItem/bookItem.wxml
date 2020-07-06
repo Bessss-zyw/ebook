@@ -1,8 +1,0 @@
-  <view class="book-item-container">
-    <image src="{{imgUrl}}" bindtap="gotoDetail"></image>
-    <view class="info-container">
-      <text class="text">{{bookid}}: book name</text>
-      <text class="text">book price</text>
-    </view>
-  </view>
-<slot></slot>

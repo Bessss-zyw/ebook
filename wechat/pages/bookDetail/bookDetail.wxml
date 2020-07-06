@@ -1,6 +1,6 @@
 <!--pages/book-detail/book-detail.wxml-->
 <view class="book-detail-page">
-  <image class="book-img" src="{{bookInfo.imgUrl}}"/>
+  <image class="book-img" src="{{bookInfo.image}}"/>
   <view class="book-detail">
     <view class="detail-item">
       <text class="title"> name: </text>
@@ -11,20 +11,22 @@
       <text class="info">{{bookInfo.author}}</text>
     </view>
     <view class="detail-item">
-      <text class="title"> language: </text>
-      <text class="info">{{bookInfo.language}}</text>
-    </view>
-    <view class="detail-item">
       <text class="title"> price: </text>
       <text class="info">{{bookInfo.price}}</text>
     </view>
+    <view wx:if="{{userInfo.authority == 2}}" class="detail-item">
+      <text class="title"> inventory: </text>
+      <text class="info">{{bookInfo.inventory}}</text>
+    </view>
     <view class="detail-item">
       <text class="title"> detail: </text>
-      <text class="info">{{bookInfo.detail}}</text>
+      <text class="info">{{bookInfo.description}}</text>
     </view>
+    
   </view>
   <view class="button-box">
-    <button class="mini-btn" size="mini">add to cart~</button>
-    <button class="mini-btn" size="mini">buy it now!</button>
+    <van-button class="mini-btn" bindtap="addToCart"  color="#ffc107">add to cart~</van-button>
+    <!-- <van-button class="mini-btn"  color="#ffc107">buy it now!</van-button> -->
   </view>
+  <van-toast id="van-toast" />
 </view>

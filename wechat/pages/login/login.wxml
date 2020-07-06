@@ -1,0 +1,24 @@
+<!--pages/login/login.wxml-->
+<view class="login-page">
+  <van-cell-group class="field-group" title="登陆">
+    <van-field
+      value="{{username}}"
+      label="用户名"
+      placeholder="请输入用户名"
+      bind:change="nameOnChange"
+    />
+    <van-field
+      value="{{password}}"
+      label="密码"
+      type="password"
+      placeholder="请输入密码"
+      bind:change="pwOnChange"
+    />
+  </van-cell-group>
+  <view class="button-group">
+    <van-button bindtap="login" color= "#ffc107" class="login-button">登陆</van-button>
+    <van-button color= "#ffc107" class="login-button">注册</van-button>
+  </view>
+  <van-toast id="van-toast" />
+</view>
+

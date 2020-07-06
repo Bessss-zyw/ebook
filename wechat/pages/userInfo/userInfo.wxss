@@ -1,4 +1,11 @@
 /* pages/userInfo/userInfo.wxss */
+
+.userInfo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .avatar {
   display: flex;
   justify-content: center;
@@ -16,12 +23,19 @@
   /* margin-left: 40px; */
   display: flex;
   flex-direction: row;
-  /* background-color: coral; */
+  margin-bottom: 5px;
 }
 
 .nickname input, .tel input, .email input, .address input {
   margin-left: 40px;
   /* background-color: cyan; */
+}
+
+.title {
+  background-color: #ffecb3;
+  font-family: 'Times New Roman', Times, serif;  
+  font-size: 18px;
+  font-weight: 15px;
 }
 
 .info {
@@ -30,4 +44,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.logout-button {
+  margin: 15px;
 }

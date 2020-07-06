@@ -38,8 +38,8 @@
 }
 
 .mini-btn{
-  margin-right: 20rpx;
-  background-color: #7986cb;
+  margin: 20rpx;
+  /* background-color: #ffc107; */
   font-family: 'Times New Roman', Times, serif;  
   font-size: 15px;
   font-weight: 8px;

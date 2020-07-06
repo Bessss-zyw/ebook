@@ -1,18 +1,54 @@
-// pages/userInfo/userInfo.js
+const util = require("../../utils/util");
+var app = getApp();
+import Toast from "../../miniprogram_npm/@vant/weapp/toast/toast";
+
 Page({
 
-  /**
-   * Page initial data
-   */
   data: {
-
+    userDetail: null
   },
 
-  /**
-   * Lifecycle function--Called when page load
-   */
-  onLoad: function (options) {
+  logout: function () {
+    wx.request({
+      url: util.apiUrl + '/logout', 
+      data: {
+        1: 1
+      },
+      method: 'POST',
+      header: {
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': app.globalData.sessionId
+      },
+      success: function(res) {
+        console.log(res);
+        if (res.statusCode != 200) {
+          Toast.fail('退出登陆失败！');
+          return;
+        }
 
+        Toast.success('退出登陆成功！');
+        app.globalData.userDetail = null;
+        app.globalData.userInfo = null;
+        app.globalData.loginState = false;
+        console.log(getApp().globalData);
+        wx.reLaunch({
+          url: '/pages/login/login',
+        })
+      },
+      fail: function (err) {
+        console.log(err);
+        Toast.fail('连接失败！');
+      }
+    })
+  },
+
+
+  onLoad: function (options) {
+    this.setData({
+      userDetail: getApp().globalData.userDetail
+    })
+    console.log(this.data);
+    
   },
 
   /**
