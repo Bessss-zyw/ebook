@@ -1,0 +1,30 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class="userInfo-page">
+  <view class="userInfo-container">
+    <view class="avatar">
+      <image class="avatar-img" mode="aspectFill" src="{{userDetail.icon.iconBase64}}"></image>
+    </view>
+    <form>
+      <view class="info">
+        <view class="nickname">
+          <text class="title">昵称</text>
+          <input value="{{userDetail.nickname}}"></input>
+        </view>
+        <view class="email">
+          <text class="title">邮箱</text>
+          <input value="{{userDetail.email}}"></input>
+        </view>
+        <view class="address">
+          <text class="title">地址</text>
+          <input value="{{userDetail.address}}"></input>
+        </view>
+        <view class="tel">
+          <text class="title">电话</text>
+          <input value="{{userDetail.tel}}"></input>
+        </view>
+      </view>
+    </form>
+  </view>
+  <van-button color= "#ffc107" class="logout-button" bindtap="logout">退出登陆</van-button>
+  <van-toast id="van-toast" />
+</view>

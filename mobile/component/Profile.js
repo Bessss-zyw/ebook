@@ -1,7 +1,6 @@
-import React, {useState, Component} from 'react';
+import React from 'react';
 import {AsyncStorage, View, Text, Button, Image, StyleSheet} from 'react-native';
 import {apiUrl, AuthContext} from '../utils/util';
-import {Card, WingBlank} from '@ant-design/react-native';
 
 const LOGOUT_URL = apiUrl + "/logout";
 
@@ -23,20 +22,17 @@ export default function Profile(props){
             .catch((error)=>{});
     }
 
-    // console.log("props");
-    // console.log(props.iconImg);
-    // console.log(props.userInfo.icon.iconBase64);
     return(
         <View>
 
             <View style={styles.infoContainer}>
+                {/*<Image*/}
+                {/*    style={styles.icon}*/}
+                {/*    source={{uri: 'https://i.loli.net/2020/05/30/bANypgG3wOfQqTE.jpg'}}*/}
+                {/*/>*/}
                 <Image
                     style={styles.icon}
-                    source={{uri: 'https://i.loli.net/2020/05/30/bANypgG3wOfQqTE.jpg'}}
-                />
-                <Image
-                    style={styles.icon}
-                    source={{uri: props.userInfo.icon.iconBase64}}
+                    source={require('../img/avatar.png')}
                 />
                 <Text>My Profile</Text>
                 <Text>nickname: {props.userInfo.nickname}</Text>

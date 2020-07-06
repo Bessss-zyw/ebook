@@ -1,17 +1,62 @@
 import React, {Component} from 'react';
-import {View,Text,Image,StyleSheet} from 'react-native';
+import {View,Text,Image,StyleSheet, Button, DeviceEventEmitter} from 'react-native';
+import {Toast} from '@ant-design/react-native';
+import {apiUrl} from '../utils/util';
+import {userAuth} from '../utils/constants'
+
+const ADD_TO_CART_URL= apiUrl + "/addToCart";
 
 export default class BookDetail extends Component {
+    constructor(props) {
+        super(props);
+        this.addToCart = this.addToCart.bind(this);
+    }
+
+    addToCart() {
+        let userId = userAuth.userId;
+        let book_id = this.props.route.params.detail.bookId;
+        let book_name = this.props.route.params.detail.name;
+        let data = {
+            user_id: userId,
+            book_id: book_id,
+            book_name: book_name
+        }
+        console.log(data);
+
+        fetch(ADD_TO_CART_URL,{
+            method:'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((responseData) => {
+                console.log(responseData);
+                Toast.success(responseData.msg);
+                DeviceEventEmitter.emit('UPDATE_CART');
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
+    }
 
     render(){
-        // console.log(this.props.route.params.detail);
         let detail = this.props.route.params.detail;
         return (
             <View style={styles.container}>
-                <Image
-                    source={{uri: detail.image}}
-                    style={styles.image}
-                />
+                {detail.image !== 'base64' && detail.image !== 'empty'?
+                    <Image
+                        source={{uri: detail.image}}
+                        style={styles.image}
+                    />:<Image
+                        source={require('../img/book.jpg')}
+                        style={styles.image}
+                    />
+                }
                 <View >
                     <Text style={styles.name}>{detail.name}</Text>
                 </View>
@@ -25,6 +70,7 @@ export default class BookDetail extends Component {
                 <View>
                     <Text style={styles.description}>{detail.description}</Text>
                 </View>
+                <Button title="加入购物车" onPress={this.addToCart}/>
             </View>
         );
     }

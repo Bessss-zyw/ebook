@@ -1,0 +1,27 @@
+<view class="cart-container">
+  <van-toast id="van-toast" />
+  <view class="cart-item" wx:for="{{cartItems}}">
+    <van-card
+      num="{{item.num}}"
+      tag="标签"
+      title="{{item.book_name}}"
+    >
+      <view slot="footer">
+        <van-button id="{{item.book_id}}" size="mini" bindtap="deleteItem">删除</van-button>
+      </view>
+      <view slot="thumb">
+        <image 
+          id="{{item.cart_item_id}}"
+          class="item-img" 
+          src="{{imgUrl}}" 
+          mode="scaleToFill"
+          bindtap="gotoDetail"
+          />
+      </view>
+    </van-card>
+  </view>
+  <view class="button-box">
+    <van-button class="mini-btn" bindtap="clearCart" >clear cart</van-button>
+    <van-button class="mini-btn" bindtap="makeOrder">buy all!</van-button>
+  </view>
+</view>

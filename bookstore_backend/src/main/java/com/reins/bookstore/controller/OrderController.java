@@ -35,6 +35,19 @@ public class OrderController {
 
 
     /**
+     * To put all the books in cart into a new order
+     */
+    @RequestMapping("/cartToOrder")
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
+    public Msg cartToOrder(@RequestParam("user_id") int user_id){
+        if (orderService.cartToOrder(user_id))
+            return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.MAKE_ORDER_SUCCESS);
+        else
+            return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.MAKE_ORDER_ERROR);
+    }
+
+
+    /**
      * To create a new order and return the order_id
      */
     @RequestMapping("/createOrder")
@@ -57,17 +70,6 @@ public class OrderController {
         return orderService.addOrderItem(order_id, cart_id);
     }
 
-    /**
-     * To put all the books in cart into a new order
-     */
-    @RequestMapping("/cartToOrder")
-    @Modifying(clearAutomatically = true, flushAutomatically = true)
-    public Msg cartToOrder(@RequestParam("user_id") int user_id){
-        if (orderService.cartToOrder(user_id))
-            return MsgUtil.makeMsg(MsgCode.SUCCESS, MsgUtil.MAKE_ORDER_SUCCESS);
-        else
-            return MsgUtil.makeMsg(MsgCode.ERROR, MsgUtil.MAKE_ORDER_ERROR);
-    }
 
 
     /**

@@ -28,7 +28,7 @@ export class StatisticUser extends React.Component{
             title: '排名',
             key: 'order',
             width: 100,
-            render: (text, record, index) => (<div>{index}</div>)
+            render: (text, record, index) => (<div>{index + 1}</div>)
         },
         {
             title: 'ID',
@@ -46,21 +46,14 @@ export class StatisticUser extends React.Component{
             title: '购买书籍数量',
             dataIndex: 'bookNum',
             key: 'bookNum',
-            width: 200,
-            sorter: {
-                compare: (a, b) => a.bookNum > b.bookNum ? 1 : -1,
-                multiple: 1,
-            },
+            width: 200
         },
         {
             title: '总消费量',
-            dataIndex: 'expenditure',
+            // dataIndex: 'expenditure',
             key: 'expenditure',
             width: 200,
-            sorter: {
-                compare: (a, b) => a.expenditure > b.expenditure ? 1 : -1,
-                multiple: 2,
-            },
+            render: (text, record) => (<div>{record.expenditure.toFixed(2)}</div>)
         }
 
     ];
@@ -109,6 +102,8 @@ export class StatisticUser extends React.Component{
                         onChange={this.onChange}
                         onOk={this.onOk}
                     />
+                    <Text strong>总本数：</Text>
+                    <Text strong>总金额：</Text>
                 </div>
                 <Table
                     columns={this.columns}

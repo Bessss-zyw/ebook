@@ -1,0 +1,35 @@
+<!--logs.wxml-->
+<view class="home">
+  <van-toast id="van-toast" />
+  <view class="page-section page-section-spacing swiper">
+    <swiper 
+      class="swiper" 
+      indicator-dots="true" 
+      autoplay="true" 
+      circular="true"
+      interval="2000" 
+      duration="500"
+      >
+      <block wx:for="{{swiperImg}}" wx:key="*this">
+        <swiper-item>
+          <image src="{{item}}" mode="scaleToFill"></image>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="book-items-container">
+    <view class="book-item" wx:for="{{books}}" wx:key="bookId">
+      <view class="book-item-container" id="{{item.bookId}}" data-id="{{item.bookId}}" bindtap="gotoDetail">
+        <!-- <image wx:if="{{item.image == 'base64'}}" src="../../static/img/book.png"/> -->
+        <image wx:if="{{item.image == 'base64'}}" src="{{item.base64.imgBase64}}"/>
+        <image wx:elif="{{item.image == 'empty'}}" src="../../static/img/book.png"/>
+        <image wx:else="{{item.image != 'empty' && item.image != 'base64'}}" src="{{item.image}}"></image>
+        <view class="info-container">
+          <text class="text">{{item.isbn}}: {{item.name}}</text>
+          <text class="text">by {{item.author}}</text>
+          <text class="price text">¥ {{item.price}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

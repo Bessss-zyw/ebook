@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, AsyncStorage, FlatList, StyleSheet, Alert, Button} from 'react-native';
+import {View, Text, AsyncStorage, FlatList, StyleSheet, Alert, Button, DeviceEventEmitter} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import {apiUrl} from '../utils/util';
 import Book from '../component/Book';
@@ -21,6 +21,16 @@ export default class Home extends Component {
     }
 
     componentDidMount(){
+        this.subscription = DeviceEventEmitter.addListener('UPDATE_HOME',
+            () => {this.update();})
+        this.update();
+    }
+
+    componentWillUnmount() {
+        this.subscription.remove();
+    }
+
+    update(){
         const _retrieveData = async () => {
             try {
                 const value = await AsyncStorage.getItem('@Bookstore:token');

@@ -1,0 +1,5 @@
+/* pages/order/order.wxss */
+.order-item-container {
+  display: flex;
+  flex-direction: column;
+}

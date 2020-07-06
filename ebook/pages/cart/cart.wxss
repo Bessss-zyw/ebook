@@ -1,0 +1,56 @@
+/* pages/cart/cart.wxss */
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .cart-item {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  height: 100px;
+  margin: 10px;
+  background-color: aquamarine;
+} */
+
+/* .cart-item image{
+  width: 40%;
+  height: 100%;
+  background-color: burlywood;
+} */
+
+/* .info-container {  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 8px;
+  background-color: crimson;
+} */
+
+/* .text {
+  font-size: 12px;
+  font-weight: 300;
+  font-family: 'Times New Roman', Times, serif;  
+} */
+
+
+.cart-item {
+  width: 80%;
+  height: 100px;
+  margin: 20px;
+  background-color: aquamarine;
+}
+
+.item-img {
+  height: 90px;
+  width: 90px;
+}
+
+.mini-btn{
+  margin: 20rpx;
+  /* background-color: #ffc107; */
+  font-family: 'Times New Roman', Times, serif;  
+  font-size: 15px;
+  font-weight: 8px;
+}

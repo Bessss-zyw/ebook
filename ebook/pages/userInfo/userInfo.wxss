@@ -1,0 +1,51 @@
+/* pages/userInfo/userInfo.wxss */
+
+.userInfo-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50rpx;
+  margin-top: 100rpx;
+}
+
+.avatar-img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.nickname, .tel, .email, .address {
+  /* margin-left: 40px; */
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 5px;
+}
+
+.nickname input, .tel input, .email input, .address input {
+  margin-left: 40px;
+  /* background-color: cyan; */
+}
+
+.title {
+  background-color: #ffecb3;
+  font-family: 'Times New Roman', Times, serif;  
+  font-size: 18px;
+  font-weight: 15px;
+}
+
+.info {
+  width: 100%;
+  /* background-color: burlywood; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logout-button {
+  margin: 15px;
+}

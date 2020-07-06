@@ -204,6 +204,12 @@ public class OrderService {
             }
         }
 
+        userConsumes.sort(new Comparator<UserConsume>() {
+            @Override
+            public int compare(UserConsume t1, UserConsume t2) {
+                return Integer.compare(t2.getBookNum(),t1.getBookNum());
+            }
+        });
         return userConsumes;
     }
 

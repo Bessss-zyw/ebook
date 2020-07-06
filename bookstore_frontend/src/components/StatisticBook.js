@@ -17,7 +17,9 @@ export class StatisticBook extends React.Component{
         this.state = {
             user: JSON.parse(localStorage.getItem("user")),
             range: [],
-            bookSale: []
+            bookSale: [],
+            total_book: 0,
+            total_price: 0.0
         };
         this.onChange = this.onChange.bind(this);
         this.onOk = this.onOk.bind(this)
@@ -29,7 +31,7 @@ export class StatisticBook extends React.Component{
             title: '排名',
             key: 'order',
             width: 100,
-            render: (text, record, index) => (<div>{index}</div>)
+            render: (text, record, index) => (<div>{index + 1}</div>)
         },
         {
             title: 'ISBN',
@@ -75,8 +77,6 @@ export class StatisticBook extends React.Component{
         console.log('onOk: ', value);
         console.log('Formatted Selected Time: ', this.state.range);
 
-
-
         if (this.state.user.userType === CUSTOMER){
             let info = {
                 user_id: this.state.user.userId,
@@ -89,6 +89,8 @@ export class StatisticBook extends React.Component{
                 this.setState({
                     bookSale: data
                 })
+                if (this.state.user.userType === CUSTOMER) this.setTotal();
+
             })
         }
         else {
@@ -102,9 +104,30 @@ export class StatisticBook extends React.Component{
                 this.setState({
                     bookSale: data
                 })
+                if (this.state.user.userType === CUSTOMER) this.setTotal();
+
             })
         }
 
+
+    }
+
+    setTotal() {
+        let bookSales = this.state.bookSale;
+        let number = 0;
+        let price = 0.0;
+        for (let i = 0;i < bookSales.length; i++){
+            price += bookSales[i].book.price * bookSales[i].sale;
+            number += bookSales[i].sale;
+        }
+
+        price.toFixed(2);
+        console.log(price);
+        console.log(number);
+        this.setState({
+            total_book: number,
+            total_price: price
+        })
     }
 
 
@@ -116,14 +139,21 @@ export class StatisticBook extends React.Component{
                 <div style={{display: "flex", flexDirection: "row", alignItems: "baseline"}}>
                     <Text strong>选择时间：&emsp;</Text>
                     <RangePicker
-                        style={{marginBottom: 20}}
+                        style={{marginBottom: '20px'}}
                         showTime={{ format: 'HH:mm' }}
                         format="YYYY-MM-DD HH:mm:ss"
                         onChange={this.onChange}
                         onOk={this.onOk}
                     />
-                </div>
 
+                </div>
+                {
+                    this.state.user.userType === CUSTOMER?
+                        (<div style={{margin: '20px'}}>
+                            <Text strong>总金额：{this.state.total_price}&emsp; </Text>
+                            <Text strong>总本数：{this.state.total_book}</Text>
+                        </div>): null
+                }
                 <Table
                     columns={this.columns}
                     dataSource={this.state.bookSale}

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View,Text,Image,StyleSheet, TouchableHighlight} from 'react-native';
 
 export default function Book(props) {
@@ -7,10 +7,15 @@ export default function Book(props) {
     return (
         <TouchableHighlight>
             <View style={styles.container}>
-                <Image
-                    source={{uri: item.image}}
-                    style={styles.image}
-                />
+                {item.image !== 'base64' && item.image !== 'empty'?
+                    <Image
+                        source={{uri: item.image}}
+                        style={styles.image}
+                    />:<Image
+                        source={require('../img/book.jpg')}
+                        style={styles.image}
+                    />
+                }
                 <View style={styles.rightContainer}>
                     <Text style={styles.name}>{item.name}</Text>
                     <Text style={styles.author}>{item.author}</Text>

@@ -1,0 +1,15 @@
+<!--pages/order/order.wxml-->
+<view class="order-container">
+  <van-toast id="van-toast" />
+  <van-collapse accordion value="{{ activeNames }}" bind:change="onChange">
+    <view class="order-box" wx:for="{{orders}}" wx:for-item="order">
+      <van-collapse-item title="订单编号：{{order.order_id}} ({{order.time}})" name="{{order.order_id}}">
+        <view class="order-item-container">
+          <text wx:for="{{orderItems}}">{{item.book_name}}: 价格 {{item.book_price}} * {{item.num}}</text>
+          <text>总金额： {{order.total_price}}</text>
+        </view>
+      </van-collapse-item>
+    </view>
+    
+  </van-collapse>
+</view>

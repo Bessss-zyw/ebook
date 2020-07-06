@@ -1,0 +1,32 @@
+<!--pages/book-detail/book-detail.wxml-->
+<view class="book-detail-page">
+  <image class="book-img" src="{{bookInfo.image}}"/>
+  <view class="book-detail">
+    <view class="detail-item">
+      <text class="title"> name: </text>
+      <text class="info">{{bookInfo.name}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> author: </text>
+      <text class="info">{{bookInfo.author}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> price: </text>
+      <text class="info">{{bookInfo.price}}</text>
+    </view>
+    <view wx:if="{{userInfo.authority == 2}}" class="detail-item">
+      <text class="title"> inventory: </text>
+      <text class="info">{{bookInfo.inventory}}</text>
+    </view>
+    <view class="detail-item">
+      <text class="title"> detail: </text>
+      <text class="info">{{bookInfo.description}}</text>
+    </view>
+    
+  </view>
+  <view class="button-box">
+    <van-button class="mini-btn" bindtap="addToCart"  color="#ffc107">add to cart~</van-button>
+    <!-- <van-button class="mini-btn"  color="#ffc107">buy it now!</van-button> -->
+  </view>
+  <van-toast id="van-toast" />
+</view>

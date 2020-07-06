@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Profile from '../component/Profile';
 import {apiUrl} from '../utils/util';
-const GET_USR_INFO_URL= apiUrl + "/getUserInfo";
 import {userAuth} from '../utils/constants'
+
+const GET_USR_INFO_URL= apiUrl + "/getUserInfo";
 
 export default class UserInfo extends Component {
 
@@ -18,8 +19,7 @@ export default class UserInfo extends Component {
                 icon: {
                     iconBase64: '../img/avatar.png'
                 }
-            },
-            iconImg: '../img/avatar.png'
+            }
         }
     }
 
@@ -57,7 +57,7 @@ export default class UserInfo extends Component {
         return (
             <View style={{alignItems: 'center'}}>
                 <View style={{alignItems: 'center', marginTop: 50}}>
-                    <Profile userInfo={this.state.userInfo} iconImg={this.state.iconImg}/>
+                    <Profile userInfo={this.state.userInfo}/>
                 </View>
             </View>
         );
